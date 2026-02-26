@@ -1,66 +1,102 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+
+import { useState } from "react";
+import "../app/globals.css";
+import MedicineHome from "./components/MedicineHome";
 
 export default function Home() {
+  const [medicines, setMedicines] = useState([
+    { name: "Ibuprofeno", quantity: 1 },
+    { name: "Ibuprofeno", quantity: 1 },
+    { name: "Ibuprofeno", quantity: 1 },
+    { name: "Ibuprofeno", quantity: 1 },
+  ]);
+
+  const [newMedicine, setNewMedicine] = useState("");
+  const [quantity, setQuantity] = useState(1);
+
+  function addMedicine() {
+    if (!newMedicine) return;
+
+    setMedicines([
+      ...medicines,
+      { name: newMedicine, quantity },
+    ]);
+
+    setNewMedicine("");
+    setQuantity(1);
+  }
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="container">
+      <div className="card">
+        <h1 className="title">Farmácia Laginhos</h1>
+
+        <div className="grid">
+          {/* Esquerda */}
+          <div className="left">
+            <div className="box">
+              <h2>Adicionar remédio</h2>
+
+              <div className="form-row">
+                <input
+                  type="text"
+                  placeholder="Digite o nome do remédio"
+                  value={newMedicine}
+                  onChange={(e) => setNewMedicine(e.target.value)}
+                />
+
+                <input
+                  type="number"
+                  value={quantity}
+                  onChange={(e) => setQuantity(Number(e.target.value))}
+                  className="qty"
+                />
+
+                <button onClick={addMedicine}>
+                  +Adicionar
+                </button>
+              </div>
+            </div>
+
+
+            <h2 className="related-title">Remédios relacionados</h2>
+
+            <div className="related-box">
+
+              <div className="list">
+                {medicines.map((med, index) => (
+                  <MedicineHome
+                    key={index}
+                    name={med.name}
+                    quantity={med.quantity}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Direita */}
+          <div className="right box">
+            <h2>Informações da receita</h2>
+
+            <input type="text" placeholder="Nome da paciente" />
+            <input type="text" placeholder="Nome do médico" />
+
+            <div className="upload">
+              <p>Upload da foto</p>
+              <div className="upload-box">
+                Selecionar Foto
+                <input type="file" />
+              </div>
+            </div>
+
+            <button className="generate">
+              Gerar Receita
+            </button>
+          </div>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }
