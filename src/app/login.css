@@ -1,0 +1,101 @@
+.login-container {
+    min-height: 100vh;
+    background: #9fb2ab;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+  }
+  
+  .login-grid {
+    display: grid;
+    grid-template-columns: 420px 600px;
+    gap: 40px;
+  }
+  
+  /* card login */
+  
+  .login-card {
+    background: #e9e9e9;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  }
+  
+  .login-card h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2f5d50;
+  }
+  
+  .login-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .login-card input,
+  .login-card select {
+  
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    background: white;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+    font-size: 16px;
+  }
+  
+  .login-card button {
+  
+    margin-top: 10px;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: #7e9f94;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  /* welcome */
+  
+  .welcome-card {
+  
+    background: #9fb2ab;
+    padding: 50px;
+    border-radius: 20px;
+    text-align: center;
+    color: #2f5d50;
+  }
+  
+  .welcome-card h1 {
+    font-size: 32px;
+    margin-bottom: 30px;
+  }
+  
+  .pharmacy-icon {
+  
+    font-size: 140px;
+    margin-bottom: 30px;
+  }
+  
+  .welcome-card p {
+  
+    max-width: 420px;
+    margin: auto;
+    font-size: 18px;
+  }
+  
+  /* footer */
+  
+  .login-footer {
+  
+    background: #9fb2ab;
+    padding: 30px;
+    border-radius: 18px;
+    width: 420px;
+    text-align: center;
+    font-weight: 600;
+    color: #2f5d50;
+  }

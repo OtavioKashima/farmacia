@@ -1,102 +1,87 @@
 "use client";
 
-import { useState } from "react";
-import "../app/globals.css";
-import MedicineHome from "./components/MedicineHome";
+import { useRouter } from "next/navigation";
+import "./login.css";
 
-export default function Home() {
-  const [medicines, setMedicines] = useState([
-    { name: "Ibuprofeno", quantity: 1 },
-    { name: "Ibuprofeno", quantity: 1 },
-    { name: "Ibuprofeno", quantity: 1 },
-    { name: "Ibuprofeno", quantity: 1 },
-  ]);
+export default function Login() {
 
-  const [newMedicine, setNewMedicine] = useState("");
-  const [quantity, setQuantity] = useState(1);
+  const router = useRouter();
 
-  function addMedicine() {
-    if (!newMedicine) return;
+  function handleLogin(e: React.FormEvent) {
+    e.preventDefault();
 
-    setMedicines([
-      ...medicines,
-      { name: newMedicine, quantity },
-    ]);
-
-    setNewMedicine("");
-    setQuantity(1);
+    // depois você pode validar usuário aqui
+    router.push("/inicio");
   }
 
   return (
-    <main className="container">
-      <div className="card">
-        <h1 className="title">Farmácia Laginhos</h1>
+    <main className="login-container">
 
-        <div className="grid">
-          {/* Esquerda */}
-          <div className="left">
-            <div className="box">
-              <h2>Adicionar remédio</h2>
+      <div className="login-grid">
 
-              <div className="form-row">
-                <input
-                  type="text"
-                  placeholder="Digite o nome do remédio"
-                  value={newMedicine}
-                  onChange={(e) => setNewMedicine(e.target.value)}
-                />
+        {/* LOGIN */}
+        <div className="login-card">
 
-                <input
-                  type="number"
-                  value={quantity}
-                  onChange={(e) => setQuantity(Number(e.target.value))}
-                  className="qty"
-                />
+          <h2>Faça seu login</h2>
 
-                <button onClick={addMedicine}>
-                  +Adicionar
-                </button>
-              </div>
-            </div>
+          <form onSubmit={handleLogin}>
 
+            <input
+              type="text"
+              placeholder="Nome"
+              required
+            />
 
-            <h2 className="related-title">Remédios relacionados</h2>
+            <input
+              type="password"
+              placeholder="Senha"
+              required
+            />
 
-            <div className="related-box">
+            <select required>
+              <option value="">Cargo</option>
+              <option value="farmaceutico">Farmacêutico</option>
+              <option value="atendente">Atendente</option>
+              <option value="admin">Administrador</option>
+            </select>
 
-              <div className="list">
-                {medicines.map((med, index) => (
-                  <MedicineHome
-                    key={index}
-                    name={med.name}
-                    quantity={med.quantity}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Direita */}
-          <div className="right box">
-            <h2>Informações da receita</h2>
-
-            <input type="text" placeholder="Nome da paciente" />
-            <input type="text" placeholder="Nome do médico" />
-
-            <div className="upload">
-              <p>Upload da foto</p>
-              <div className="upload-box">
-                Selecionar Foto
-                <input type="file" />
-              </div>
-            </div>
-
-            <button className="generate">
-              Gerar Receita
+            <button type="submit">
+              Entrar
             </button>
-          </div>
+
+          </form>
         </div>
+
+
+        {/* BEM VINDO */}
+        <div className="welcome-card">
+
+          <h1>
+            Bem Vindo(a) ao sistema da
+            <br />
+            Farmácia Laginhos!
+          </h1>
+
+          <div className="pharmacy-icon">
+            ⚕
+          </div>
+
+          <p>
+            Esse sistema foi desenvolvido com a finalidade
+            de facilitar e auxiliar seu trabalho. Por favor,
+            sinta-se à vontade para entrar em contato caso
+            queira fazer qualquer relato ou sugestão.
+          </p>
+
+        </div>
+
       </div>
+
+      {/* BOX INFERIOR */}
+      <div className="login-footer">
+        Após inserir todas as informações, clique em entrar!
+      </div>
+
     </main>
   );
 }
